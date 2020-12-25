@@ -1,5 +1,7 @@
-try: import Tkinter as tk # this is for python2 
-except: import tkinter as tk
+try: 
+    import Tkinter as tk # this is for python2 
+except: 
+    import tkinter as tk
 from tkinter import*
 class Bill_App:
     def __init__(self,root):
