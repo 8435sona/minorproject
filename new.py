@@ -6,7 +6,7 @@ class Bill_App:
         self.root=root
         self.root.geometry("1350x700+0+0")
         self.root.title("Shopping Bill Software")
-        bg_color="#074463"
+        bg_color="grey10"
         title=Label(self.root,text="Shopping Bill Software",bd=12,relief=GROOVE,bg=bg_color,fg="white",font=("times new roman",30,"bold"),pady=2).pack(fill=X)
         #*******Variables*******
         #*******Cosmetics*******
@@ -41,7 +41,7 @@ class Bill_App:
 
         #*******Customer*******
         self.c_name=StringVar()
-        self.c_phon=StringVar() 
+        self.c_phon=StringVar()
         self.bill_no=StringVar()
         x=random.randint(10000,99999)
         self.bill_no.set(str(x))
@@ -166,10 +166,10 @@ class Bill_App:
         btn_F=Frame(F6,bd=7,relief=GROOVE)
         btn_F.place(x=720,width=605,height=105)
 
-        total_btn=Button(btn_F,command=self.total,text="Total",bg="cadetblue",fg="white",bd=2,pady=15,width=11,font="arial 15 bold").grid(row=0,column=0,padx=5,pady=5)
-        Gbill_btn=Button(btn_F,text="Generate Bill",command=self.bill_area,bg="cadetblue",fg="white",bd=2,pady=15,width=11,font="arial 15 bold").grid(row=0,column=1,padx=5,pady=5)
-        Clear_btn=Button(btn_F,text="Clear",command=self.clear_data,bg="cadetblue",fg="white",bd=2,pady=15,width=10,font="arial 15 bold").grid(row=0,column=2,padx=5,pady=5)
-        Exit_btn=Button(btn_F,text="Exit",command=self.Exit_app,bg="cadetblue",fg="white",bd=2,pady=15,width=10,font="arial 15 bold").grid(row=0,column=3,padx=5,pady=5)
+        total_btn=Button(btn_F,command=self.total,text="Total",bg="grey40",fg="white",bd=2,pady=15,width=11,font="arial 15 bold").grid(row=0,column=0,padx=5,pady=5)
+        Gbill_btn=Button(btn_F,text="Generate Bill",command=self.bill_area,bg="grey40",fg="white",bd=2,pady=15,width=11,font="arial 15 bold").grid(row=0,column=1,padx=5,pady=5)
+        Clear_btn=Button(btn_F,text="Clear",command=self.clear_data,bg="grey40",fg="white",bd=2,pady=15,width=10,font="arial 15 bold").grid(row=0,column=2,padx=5,pady=5)
+        Exit_btn=Button(btn_F,text="Exit",command=self.Exit_app,bg="red",fg="white",bd=2,pady=15,width=10,font="arial 15 bold").grid(row=0,column=3,padx=5,pady=5)
         self.welcome_bill()
 
     def total(self):
@@ -248,6 +248,12 @@ class Bill_App:
     def bill_area(self):
         if self.c_name.get()=="" or self.c_phon.get()=="":
             messagebox.showerror("Error","Customer details are must")
+        #elif not (self.c_name.get().isalpha()):
+            #messagebox.showerror("Error","Customer name is invalid")
+        elif not (self.c_phon.get().isnumeric()):
+            messagebox.showerror("Error","Number should not contain characters")
+        elif len(self.c_phon.get()) != 10:
+            messagebox.showerror("Error","Number is invalid")
         elif self.cosmetic_price.get()=="Rs. 0.0" and self.grocery_price.get()=="Rs. 0.0" and self.vegetable_price.get()=="Rs. 0.0":
             messagebox.showerror("Error","No Product purchased")
         else:    
@@ -322,7 +328,7 @@ class Bill_App:
             self.txtarea.insert(END,f"\n Total Bill : \t\t\tRs. {self.Total_bill}")
             self.txtarea.insert(END,f"\n--------------------------------------")
             self.save_bill()
-            
+
     def save_bill(self):
         op=messagebox.askyesno("Save Bill","Do you want to save the Bill?")
         if op>0:
